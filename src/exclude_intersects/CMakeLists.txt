@@ -1,0 +1,3 @@
+add_executable(exclude_intersects exclude_intersects.cpp)
+target_compile_features(exclude_intersects PUBLIC cxx_std_20)
+
