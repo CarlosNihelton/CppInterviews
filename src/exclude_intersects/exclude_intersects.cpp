@@ -19,7 +19,10 @@ vector<pair<int,int>> removeInterval(vector<pair<int,int>> intervals, pair<int,i
   vector<pair<int,int>> unified;
 
   for(auto p : intervals){
-    if(noIntersect(toBeRemoved,p))
+    if(isContained(p,toBeRemoved)){
+      continue;
+    }
+    else if(noIntersect(toBeRemoved,p))
     unified.push_back(p);
     else if(isContained(toBeRemoved,p)){
       unified.push_back(make_pair(p.first,toBeRemoved.first));
@@ -30,9 +33,6 @@ vector<pair<int,int>> removeInterval(vector<pair<int,int>> intervals, pair<int,i
     }
     else if(intersectsRight(toBeRemoved,p)){
       unified.push_back(make_pair(p.first,toBeRemoved.first));
-    }
-    else if(isContained(p,toBeRemoved)){
-      //nop
     }
   }
   return unified;
