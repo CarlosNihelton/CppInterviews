@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir $1
+mkdir src/$1
 
 touch "src/$1/$1.h"
 cat <<EOF > src/$1/$1.cpp
