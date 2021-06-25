@@ -1,5 +1,9 @@
 #include <vector>
 #include <iostream>
+#include <array>
+#include <cassert>
+#include <chrono>
+#include <optional>
 
 /*
 * The binomial coefficient indexed by n and k denoted by ( n chooses k ) is the
@@ -9,7 +13,7 @@
 *
 * The task is implement a function below in a more efficient way:
 *
-* unsigned int bin(unsigned int n, unsigned int k)
+* unsigned long long bin(unsigned long long n, unsigned long long k)
 *
 * ==========
 *
