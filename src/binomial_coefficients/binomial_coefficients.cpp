@@ -17,19 +17,19 @@
 // the moment it is actually required.
 class PascalTriangle {
 private:
-  std::optional<std::vector<std::vector<unsigned long long>>> coreCache;
+  std::optional<std::vector<std::vector<unsigned long>>> coreCache;
 
-  void computeCacheUntilRow(unsigned long long n) {
+  void computeCacheUntilRow(unsigned int n) {
     if (!coreCache.has_value()) {
       coreCache.emplace(
-          std::initializer_list<std::vector<unsigned long long>>{{2u}});
+          std::initializer_list<std::vector<unsigned long>>{{2u}});
     }
-    for (unsigned long long row = coreCache->size(); row < n; ++row) {
-      coreCache->emplace_back(std::vector<unsigned long long>(row + 1));
+    for (unsigned int row = coreCache->size(); row < n; ++row) {
+      coreCache->emplace_back(std::vector<unsigned long>(row + 1));
       auto &cache = coreCache.value();
       cache[row][0] = row + 2;
       cache[row][row] = row + 2;
-      for (unsigned long long column = 1; column < row; ++column) {
+      for (unsigned int column = 1; column < row; ++column) {
         cache[row][column] =
             cache[row - 1][column] + cache[row - 1][column - 1];
       }
@@ -37,9 +37,9 @@ private:
   }
 
 public:
-  unsigned long long max_n_cached() { return coreCache->size() + 1; }
+  unsigned int max_n_cached() { return coreCache->size() + 1; }
 
-  unsigned long long bin(unsigned long long n, unsigned long long k) {
+  unsigned long bin(unsigned int n, unsigned int k) {
     // This avoids storing some 1s unnecessarily.
     if (n == 0 || k == 0 || n == k)
       return 1u;
@@ -53,13 +53,13 @@ public:
   }
 };
 
-unsigned long long bin(unsigned long long n, unsigned long long k) {
+unsigned long bin(unsigned int n, unsigned int k) {
   static PascalTriangle _pascal;
   return _pascal.bin(n, k);
 }
 
 int main(int argc, char *argv[]) {
-  std::array<std::array<unsigned long long, 3>, 10> expected{
+  std::array<std::array<unsigned int, 3>, 10> expected{
       {{0, 0, 1},
        {5, 0, 1},
        {2, 2, 1},
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
   for (const auto &exp : expected) {
     std::cout << "Testing n=" << exp[0] << ", k=" << exp[1] << "\t";
     auto start = std::chrono::steady_clock::now();
-    unsigned long long actual = bin(exp[0], exp[1]);
+    unsigned int actual = bin(exp[0], exp[1]);
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration<double> seconds = end - start;
     std::cout << "actual=" << actual << "\t with duration: " << seconds.count();

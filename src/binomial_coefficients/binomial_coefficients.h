@@ -13,7 +13,7 @@
 *
 * The task is implement a function below in a more efficient way:
 *
-* unsigned long long bin(unsigned long long n, unsigned long long k)
+* unsigned long bin(unsigned int n, unsigned int k)
 *
 * ==========
 *
